@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ioannis Kazakos | Software Developer & SOC Analyst L1</title>
   
+  <!-- Force Scroll to Top Before Render -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
+
   <!-- Google Fonts & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -660,7 +668,8 @@ Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
         </div>
         <div class="terminal-line">
           <span class="prompt">johnkaz1@guest:~$</span>
-          <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off" spellcheck="false">
+          <!-- REMOVED autofocus TO PREVENT AUTO-SCROLLING DOWN ON PAGE LOAD -->
+          <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false">
         </div>
       </div>
     </div>
@@ -869,20 +878,17 @@ Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
        ========================================================================== -->
   <script>
     /* ------------------------------------------------------------------------
-       0. START AT TOP ON LOAD
+       0. ENSURE START AT TOP ON PAGE LOAD / REFRESH
        ------------------------------------------------------------------------ */
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
     window.addEventListener('beforeunload', () => {
       window.scrollTo(0, 0);
     });
     window.addEventListener('load', () => {
-      window.scrollTo(0, 0);
+      setTimeout(() => { window.scrollTo(0, 0); }, 10);
     });
 
     /* ------------------------------------------------------------------------
-       1. WEB AUDIO SYNTHESIZER & HOVER SOUND EFFECTS FOR BUTTONS AND BOXES
+       1. WEB AUDIO SYNTHESIZER & HOVER SOUND EFFECTS
        ------------------------------------------------------------------------ */
     let sfxEnabled = true;
     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -917,7 +923,7 @@ Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
       if (sfxEnabled) playBeep(800, 0.1, 'square');
     });
 
-    // Sound effect on hover & click for buttons, links, inputs AND boxes (.card, .contact-box, .timeline-item, .terminal-wrapper)
+    // Sound effects on hover and click for interactive boxes & buttons
     const interactiveElements = document.querySelectorAll('a, button, input, .card, .contact-box, .timeline-item, .terminal-wrapper, .filter-btn');
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', () => playBeep(450, 0.03, 'sine'));
@@ -925,12 +931,13 @@ Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
     });
 
     /* ------------------------------------------------------------------------
-       2. NEON PARTICLE CANVAS MESH WITH MOUSE HOVER CONNECTION
+       2. SUPER INSANE & CRAZY INTERACTIVE NEON PARTICLE CANVAS MESH
        ------------------------------------------------------------------------ */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let mouse = { x: null, y: null };
+    let shockwaves = [];
+    let mouse = { x: null, y: null, active: false };
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -942,72 +949,166 @@ Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
     window.addEventListener('mousemove', (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+      mouse.active = true;
     });
 
     window.addEventListener('mouseleave', () => {
-      mouse.x = null;
-      mouse.y = null;
+      mouse.active = false;
+    });
+
+    // Click Shockwave Effect on Canvas
+    window.addEventListener('click', (e) => {
+      shockwaves.push({
+        x: e.clientX,
+        y: e.clientY,
+        radius: 10,
+        maxRadius: 220,
+        opacity: 1
+      });
+      playBeep(950, 0.08, 'sawtooth');
     });
 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.radius = Math.random() * 1.8 + 0.5;
+        this.baseVx = (Math.random() - 0.5) * 1.2;
+        this.baseVy = (Math.random() - 0.5) * 1.2;
+        this.vx = this.baseVx;
+        this.vy = this.baseVy;
+        this.radius = Math.random() * 2.2 + 0.8;
+        this.color = Math.random() > 0.3 ? '#00f0ff' : (Math.random() > 0.5 ? '#00ff66' : '#a855f7');
       }
       update() {
+        // Dynamic Mouse Attraction & Push Physics
+        if (mouse.active && mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          let maxDist = 220;
+
+          if (dist < maxDist) {
+            let force = (maxDist - dist) / maxDist;
+            // Gentle magnetic attraction towards cursor
+            this.vx += (dx / dist) * force * 0.45;
+            this.vy += (dy / dist) * force * 0.45;
+          }
+        }
+
+        // Apply velocities with friction damping
         this.x += this.vx;
         this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        this.vx += (this.baseVx - this.vx) * 0.05;
+        this.vy += (this.baseVy - this.vy) * 0.05;
+
+        // Bounce off canvas boundaries
+        if (this.x < 0 || this.x > canvas.width) this.baseVx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.baseVy *= -1;
       }
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.5)';
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
         ctx.fill();
+        ctx.shadowBlur = 0; // reset blur for performance
       }
     }
 
-    for (let i = 0; i < 55; i++) particles.push(new Particle());
+    for (let i = 0; i < 65; i++) particles.push(new Particle());
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Draw Mouse Glowing Cyber-Aura
+      if (mouse.active && mouse.x !== null && mouse.y !== null) {
+        let auraGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 220);
+        auraGrad.addColorStop(0, 'rgba(0, 240, 255, 0.18)');
+        auraGrad.addColorStop(0.5, 'rgba(168, 85, 247, 0.06)');
+        auraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = auraGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 220, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 2. Expand and Draw Click Shockwaves
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        let sw = shockwaves[i];
+        sw.radius += 8;
+        sw.opacity -= 0.025;
+
+        if (sw.opacity <= 0) {
+          shockwaves.splice(i, 1);
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(0, 240, 255, ${sw.opacity})`;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // Push nearby particles on shockwave hit
+        particles.forEach(p => {
+          let dx = p.x - sw.x;
+          let dy = p.y - sw.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (Math.abs(dist - sw.radius) < 25) {
+            p.vx += (dx / dist) * 4;
+            p.vy += (dy / dist) * 4;
+          }
+        });
+      }
+
+      // 3. Update & Draw Particles
       particles.forEach(p => { p.update(); p.draw(); });
 
-      // Draw lines between particles
+      // 4. Crazy Particle-to-Particle & Particle-to-Mouse Connections
       for (let a = 0; a < particles.length; a++) {
+        // Standard Inter-Particle Connections
         for (let b = a + 1; b < particles.length; b++) {
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
+
+          if (dist < 125) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 240, 255, ${0.15 - dist / 800})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.18 - dist / 750})`;
+            ctx.lineWidth = 0.7;
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
             ctx.stroke();
           }
         }
 
-        // Draw line from mouse to nearby particles
-        if (mouse.x !== null && mouse.y !== null) {
+        // CRAZY MOUSE LASER CONNECTIONS
+        if (mouse.active && mouse.x !== null && mouse.y !== null) {
           let mdx = particles[a].x - mouse.x;
           let mdy = particles[a].y - mouse.y;
           let mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-          if (mdist < 160) {
+
+          if (mdist < 220) {
+            let intensity = (220 - mdist) / 220;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 240, 255, ${0.35 - mdist / 500})`;
-            ctx.lineWidth = 1;
+            
+            // Dynamic Gradient Laser Line
+            let lineGrad = ctx.createLinearGradient(particles[a].x, particles[a].y, mouse.x, mouse.y);
+            lineGrad.addColorStop(0, particles[a].color);
+            lineGrad.addColorStop(1, '#00f0ff');
+
+            ctx.strokeStyle = lineGrad;
+            ctx.globalAlpha = intensity * 0.85;
+            ctx.lineWidth = 1 + intensity * 2.2; // Thicker lines closer to cursor
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
+            ctx.globalAlpha = 1.0; // reset
           }
         }
       }
+
       requestAnimationFrame(animateParticles);
     }
     animateParticles();
