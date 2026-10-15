@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>John Kaz | Full Stack Developer & SOC Level 1 Analyst</title>
+  <title>Ioannis (John) Kazakos | Software Developer & SOC Analyst L1</title>
   
   <!-- Google Fonts & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,7 +215,7 @@
     .hero-description {
       font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 650px;
+      max-width: 680px;
       margin-bottom: 32px;
     }
 
@@ -336,7 +336,7 @@
       width: 100%;
     }
 
-    /* Tech Stack Grid */
+    /* Grid & Card Styles */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -354,7 +354,6 @@
     .card:hover {
       background: var(--bg-card-hover);
       border-color: var(--accent-cyan);
-      transform: translateY(-50px);
       transform: translateY(-4px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.2);
     }
@@ -392,6 +391,67 @@
     }
     .badge.dev {
       border-color: rgba(0, 240, 255, 0.3);
+      color: var(--accent-cyan);
+    }
+    .badge.cert {
+      border-color: rgba(168, 85, 247, 0.4);
+      color: var(--accent-purple);
+    }
+
+    /* Experience Timeline */
+    .timeline {
+      margin-top: 30px;
+      position: relative;
+      border-left: 2px solid rgba(0, 240, 255, 0.2);
+      padding-left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -31px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 10px var(--accent-cyan);
+    }
+    .timeline-date {
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .timeline-subtitle {
+      font-size: 0.95rem;
+      color: var(--accent-cyan);
+      margin-bottom: 12px;
+    }
+    .timeline-list {
+      list-style: none;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+    .timeline-list li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 16px;
+    }
+    .timeline-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
       color: var(--accent-cyan);
     }
 
@@ -439,7 +499,7 @@
       color: var(--accent-cyan);
     }
 
-    /* Contact & Footer */
+    /* Contact Box */
     .contact-box {
       background: linear-gradient(135deg, rgba(15, 20, 32, 0.9), rgba(10, 14, 23, 0.95));
       border: 1px solid var(--border-glow);
@@ -479,10 +539,11 @@
     <div class="container">
       <nav>
         <div class="brand">
-          <i class="fa-solid fa-terminal"></i> johnkaz1<span>.io</span>
+          <i class="fa-solid fa-terminal"></i> ioannis_kazakos<span>.io</span>
         </div>
         <ul class="nav-links">
           <li><a href="#about">// About</a></li>
+          <li><a href="#experience">// Experience</a></li>
           <li><a href="#terminal">// Terminal</a></li>
           <li><a href="#stack">// Tech Stack</a></li>
           <li><a href="#projects">// Projects</a></li>
@@ -499,26 +560,33 @@
         <div>
           <div class="status-badge">
             <span class="status-dot"></span>
-            <span>READY FOR DEPLOYMENT & INCIDENT RESPONSE</span>
+            <span>AVAILABLE FOR SOFTWARE & SOC SECURITY ROLES</span>
           </div>
-          <h1>John Kaz</h1>
+          <h1>Ioannis (John) Kazakos</h1>
           <div class="role-title">
-            <span id="typing-text">Full Stack Software Developer</span>
+            <span id="typing-text">Software Developer</span>
             <span class="role-divider">|</span>
-            <span style="color: var(--accent-green);">SOC Level 1 Analyst</span>
+            <span style="color: var(--accent-green);">SOC Analyst L1</span>
           </div>
           <p class="hero-description">
-            Building robust, scalable modern web applications while monitoring, analyzing, and safeguarding infrastructure against cyber threats. Bridging software engineering with Security Operations.
+            Electrical & Computer Engineering student (M.Eng) at the University of the Peloponnese with strong technical expertise in full-stack development, embedded systems, and cybersecurity operations (SAL1 Certified).
           </p>
+          
+          <div style="margin-bottom: 24px;" class="badge-group">
+            <span class="badge cert"><i class="fa-solid fa-certificate"></i> SAL1 Certified Security Analyst</span>
+            <span class="badge cert"><i class="fa-solid fa-graduation-cap"></i> ECE M.Eng Student (Uni. Peloponnese)</span>
+            <span class="badge cert"><i class="fa-solid fa-language"></i> Michigan ECPE C2 Fluent</span>
+          </div>
+
           <div class="cta-group">
             <a href="#projects" class="btn btn-primary">
-              <i class="fa-solid fa-code"></i> Explore Projects
+              <i class="fa-solid fa-code"></i> View Projects
             </a>
-            <a href="#terminal" class="btn btn-outline">
-              <i class="fa-solid fa-terminal"></i> Launch Terminal
+            <a href="#experience" class="btn btn-outline">
+              <i class="fa-solid fa-briefcase"></i> Experience
             </a>
-            <a href="#contact" class="btn btn-outline">
-              <i class="fa-solid fa-paper-plane"></i> Get In Touch
+            <a href="mailto:kazakosioannisss@gmail.com" class="btn btn-outline">
+              <i class="fa-solid fa-envelope"></i> Contact Me
             </a>
           </div>
         </div>
@@ -526,13 +594,51 @@
     </div>
   </section>
 
-  <!-- Interactive Terminal Section -->
-  <section class="container" id="terminal">
+  <!-- Experience Section -->
+  <section class="container" id="experience" style="margin-top: 40px;">
     <div class="section-title">
-      <span>01.</span> Cyber Interactive Terminal
+      <span>01.</span> Professional Experience
+    </div>
+    
+    <div class="timeline">
+      
+      <!-- Hyperion Drone Team -->
+      <div class="timeline-item">
+        <div class="timeline-date">2025 - 2026</div>
+        <div class="timeline-title">Software Engineer</div>
+        <div class="timeline-subtitle">Hyperion Drone Team (Award-winning High-Tech Team)</div>
+        <ul class="timeline-list">
+          <li>Development of the official team website & drone ground station software.</li>
+          <li>Engineered FPV Video Streaming software & real-time fire detection and localization technology.</li>
+          <li>Implementation & PID controller tuning for precise drone stabilization.</li>
+          <li>Embedded systems engineering using Raspberry Pi and Arduino boards.</li>
+          <li>3D printer firmware installation, modification, Linux administration & Bash scripting.</li>
+        </ul>
+      </div>
+
+      <!-- POSI -->
+      <div class="timeline-item">
+        <div class="timeline-date">2025 - 2026</div>
+        <div class="timeline-title">Software Developer / Technician</div>
+        <div class="timeline-subtitle">POSI - Point Of Sale Innovations</div>
+        <ul class="timeline-list">
+          <li>Developed the company's official website & designed the "Posi Help" mobile app (Android / iOS).</li>
+          <li>Built custom software solutions for client businesses (e.g. KEK-A Fitness Card Registration).</li>
+          <li>Provided on-site technical support covering both hardware & software infrastructure.</li>
+          <li>Installed, configured, and maintained cash registers, POS systems, and ERP digital workflows.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Terminal Section -->
+  <section class="container" id="terminal" style="margin-top: 80px;">
+    <div class="section-title">
+      <span>02.</span> Interactive Cyber Terminal
     </div>
     <p style="color: var(--text-muted); font-family: var(--font-code); font-size: 0.9rem;">
-      Type <span style="color: var(--accent-green);">help</span> to see available commands or try <span style="color: var(--accent-cyan);">analyze</span> / <span style="color: var(--accent-purple);">theme</span>.
+      Type <span style="color: var(--accent-green);">help</span> to explore or try <span style="color: var(--accent-cyan);">cv</span>, <span style="color: var(--accent-purple);">soc</span>, or <span style="color: var(--accent-green);">analyze</span>.
     </p>
 
     <div class="terminal-wrapper">
@@ -542,17 +648,18 @@
           <div class="dot dot-yellow"></div>
           <div class="dot dot-green"></div>
         </div>
-        <div class="terminal-title">johnkaz1@soc-workstation:~ (zsh)</div>
+        <div class="terminal-title">ikazakos@patras-workstation:~ (zsh)</div>
         <div style="color: var(--text-muted); font-size: 0.8rem;"><i class="fa-solid fa-shield-halved"></i> SEC-MODE</div>
       </div>
       <div class="terminal-body" id="terminal-body">
         <div class="terminal-output" id="terminal-output">
-welcome to johnkaz1 OS v2.4 (Security & Full Stack Suite)
-Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
+Ioannis Kazakos OS v2.6 (Software & SAL1 Security Suite)
+Location: Patras, Greece | Degree: ECE M.Eng (University of Peloponnese)
+Type 'help' for commands or try 'cv', 'soc', 'stack', 'projects', 'analyze'.
 --------------------------------------------------------------------------------
         </div>
         <div class="terminal-line">
-          <span class="prompt">johnkaz1@soc-net:~$</span>
+          <span class="prompt">ikazakos@patras-net:~$</span>
           <input type="text" id="terminal-input" class="terminal-input" autofocus autocomplete="off" spellcheck="false">
         </div>
       </div>
@@ -562,41 +669,41 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
   <!-- Tech Stack Grid -->
   <section class="container" id="stack" style="margin-top: 80px;">
     <div class="section-title">
-      <span>02.</span> Core Competencies & Skills
+      <span>03.</span> Technical Skills & Tooling
     </div>
     <div class="grid-2">
       
-      <!-- Full Stack Card -->
+      <!-- Software & Development Card -->
       <div class="card">
-        <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <h3>Full Stack Development</h3>
-        <p>Architecting clean APIs, responsive frontends, and reliable backend databases.</p>
+        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Software & Embedded Engineering</h3>
+        <p>Full stack web development, embedded Linux systems, and custom software architectures.</p>
         <div class="badge-group">
-          <span class="badge dev">JavaScript (ES6+)</span>
-          <span class="badge dev">TypeScript</span>
-          <span class="badge dev">React / Next.js</span>
-          <span class="badge dev">Node.js / Express</span>
           <span class="badge dev">Python</span>
-          <span class="badge dev">PostgreSQL / MongoDB</span>
-          <span class="badge dev">REST APIs & GraphQL</span>
-          <span class="badge dev">HTML5 / CSS3 / Tailwind</span>
+          <span class="badge dev">C / C++</span>
+          <span class="badge dev">HTML5 / CSS3 / JavaScript</span>
+          <span class="badge dev">MySQL / SQL</span>
+          <span class="badge dev">Raspberry Pi</span>
+          <span class="badge dev">Arduino</span>
+          <span class="badge dev">Linux & Bash Scripting</span>
+          <span class="badge dev">PowerShell & CMD</span>
         </div>
       </div>
 
-      <!-- SOC L1 Card -->
+      <!-- SOC & Cybersecurity Card -->
       <div class="card">
         <div class="card-icon" style="color: var(--accent-green);"><i class="fa-solid fa-user-shield"></i></div>
-        <h3>SOC Level 1 Operations</h3>
-        <p>Monitoring security alerts, PCAP analysis, malware triage, and incident escalation.</p>
+        <h3>SOC Level 1 Operations & Security</h3>
+        <p>Certified SAL1 Security Analyst specializing in traffic analysis, log triage, and incident response.</p>
         <div class="badge-group">
-          <span class="badge soc">SIEM (Splunk / ELK)</span>
-          <span class="badge soc">Wireshark & PCAP Analysis</span>
-          <span class="badge soc">Log Analysis & Triage</span>
+          <span class="badge soc">SIEM / Splunk</span>
+          <span class="badge soc">Wireshark & Protocol Analysis</span>
+          <span class="badge soc">Windows Event Viewer</span>
+          <span class="badge soc">Linux Audit Logs</span>
           <span class="badge soc">Snort & YARA Rules</span>
-          <span class="badge soc">Phishing Analysis</span>
-          <span class="badge soc">Threat Intelligence</span>
-          <span class="badge soc">Incident Escalation</span>
-          <span class="badge soc">Linux & Shell Scripting</span>
+          <span class="badge soc">MITRE ATT&CK Framework</span>
+          <span class="badge soc">Threat Intelligence & IOCs</span>
+          <span class="badge soc">Malware Analysis Fundamentals</span>
         </div>
       </div>
 
@@ -606,105 +713,120 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
   <!-- Projects Section -->
   <section class="container" id="projects" style="margin-top: 100px;">
     <div class="section-title">
-      <span>03.</span> Featured Projects
+      <span>04.</span> Featured Projects
     </div>
-    <p style="color: var(--text-muted);">Explore some of my Full Stack creations and Security tools.</p>
+    <p style="color: var(--text-muted);">Real-world software systems, drone technology, and client applications built by Ioannis Kazakos.</p>
 
     <!-- Filter Buttons -->
     <div class="filter-tabs">
       <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
-      <button class="filter-btn" onclick="filterProjects('fullstack')">Full Stack</button>
-      <button class="filter-btn" onclick="filterProjects('security')">SOC & Cyber</button>
-      <button class="filter-btn" onclick="filterProjects('tools')">Tools & Scripts</button>
+      <button class="filter-btn" onclick="filterProjects('embedded')">Drone & Embedded</button>
+      <button class="filter-btn" onclick="filterProjects('software')">Software & Mobile</button>
+      <button class="filter-btn" onclick="filterProjects('security')">SOC & Systems</button>
     </div>
 
     <!-- Grid of Projects -->
     <div class="grid-2" id="projects-grid">
 
-      <!-- Project 1: Customizable Template -->
+      <!-- Project 1: UAV Ground Station -->
+      <div class="card project-card" data-category="embedded">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="badge dev">DRONE & EMBEDDED</span>
+            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2025 - 2026</span>
+          </div>
+          <h3>UAV Ground Station Software</h3>
+          <p>Ground station software developed for the Hyperion Drone Team, facilitating real-time flight telemetry, FPV video streaming, and PID stabilization monitoring.</p>
+          <div class="badge-group">
+            <span class="badge">Python</span>
+            <span class="badge">Raspberry Pi</span>
+            <span class="badge">Linux</span>
+            <span class="badge">PID Tuning</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/johnkaz1" target="_blank" title="View GitHub Repo"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <!-- Project 2: CHIP-8 Emulator -->
       <div class="card project-card" data-category="security">
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="badge soc">SOC & SECURITY</span>
-            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2026</span>
+            <span class="badge dev">LOW LEVEL / SYSTEMS</span>
+            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2025</span>
           </div>
-          <h3>SIEM Alert Triage Dashboard</h3>
-          <p>Real-time log ingestion engine and rule alert monitor for SOC analysts to quickly identify anomalous network traffic and brute-force attempts.</p>
+          <h3>CHIP-8 Emulator</h3>
+          <p>Low-level virtual machine interpreter emulating the CHIP-8 architecture, handling opcode parsing, display rendering, memory allocation, and CPU cycles.</p>
           <div class="badge-group">
-            <span class="badge">Python</span>
-            <span class="badge">Elasticsearch</span>
-            <span class="badge">React</span>
-            <span class="badge">Docker</span>
+            <span class="badge">C / C++</span>
+            <span class="badge">System Architecture</span>
+            <span class="badge">Memory Mgmt</span>
           </div>
         </div>
         <div class="project-links">
-          <a href="https://github.com/johnkaz1" target="_blank" title="View Source"><i class="fa-brands fa-github"></i></a>
-          <a href="#" onclick="alert('Link coming soon!'); return false;" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          <a href="https://github.com/johnkaz1" target="_blank" title="View GitHub Repo"><i class="fa-brands fa-github"></i></a>
         </div>
       </div>
 
-      <!-- Project 2: Customizable Template -->
-      <div class="card project-card" data-category="fullstack">
+      <!-- Project 3: Posi Help Mobile App -->
+      <div class="card project-card" data-category="software">
         <div>
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="badge dev">FULL STACK</span>
-            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2026</span>
+            <span class="badge dev">MOBILE APP</span>
+            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2025 - 2026</span>
           </div>
-          <h3>Full-Stack Cyber Analytics SaaS</h3>
-          <p>A web dashboard for tracking key infrastructure health, backend API metrics, user authentication, and system logs with role-based access.</p>
+          <h3>Posi Help Mobile Application</h3>
+          <p>Android and iOS mobile application designed and built for POSI (Point Of Sale Innovations) to streamline client support requests and system diagnostics.</p>
           <div class="badge-group">
-            <span class="badge">Next.js</span>
-            <span class="badge">TypeScript</span>
-            <span class="badge">Node.js</span>
-            <span class="badge">PostgreSQL</span>
-          </div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/johnkaz1" target="_blank" title="View Source"><i class="fa-brands fa-github"></i></a>
-          <a href="#" onclick="alert('Link coming soon!'); return false;" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </div>
-
-      <!-- Project 3: Customizable Template -->
-      <div class="card project-card" data-category="tools">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="badge soc">TOOLS & SCRIPTS</span>
-            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2026</span>
-          </div>
-          <h3>Automated Threat Intel Feed Parser</h3>
-          <p>Python tool that aggregates malicious IP & hash IOC feeds, formats them into YARA/Snort rules, and generates instant daily alert summaries.</p>
-          <div class="badge-group">
-            <span class="badge">Python</span>
-            <span class="badge">REST API</span>
-            <span class="badge">YARA</span>
-            <span class="badge">CLI</span>
-          </div>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/johnkaz1" target="_blank" title="View Source"><i class="fa-brands fa-github"></i></a>
-        </div>
-      </div>
-
-      <!-- Project 4: Interactive Portfolio -->
-      <div class="card project-card" data-category="fullstack">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="badge dev">WEB & UI</span>
-            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2026</span>
-          </div>
-          <h3>Cyberpunk Developer & SOC Portfolio</h3>
-          <p>Modern single-page developer website with custom terminal, audio synthesizer SFX, neon theme switcher, and particle canvas mesh.</p>
-          <div class="badge-group">
-            <span class="badge">HTML5/CSS3</span>
+            <span class="badge">Cross-Platform</span>
             <span class="badge">JavaScript</span>
-            <span class="badge">Canvas API</span>
-            <span class="badge">GitHub Pages</span>
+            <span class="badge">REST APIs</span>
+            <span class="badge">POS Workflows</span>
           </div>
         </div>
         <div class="project-links">
-          <a href="https://github.com/johnkaz1/johnkaz1.github.io" target="_blank" title="View Source"><i class="fa-brands fa-github"></i></a>
-          <a href="https://johnkaz1.github.io" target="_blank" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          <a href="https://github.com/johnkaz1" target="_blank" title="View GitHub Repo"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <!-- Project 4: POSI - KEK-A Fitness Card Software -->
+      <div class="card project-card" data-category="software">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="badge dev">CLIENT SOFTWARE</span>
+            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2025 - 2026</span>
+          </div>
+          <h3>POSI - KEK-A Fitness Card Registration</h3>
+          <p>Custom client software solution engineered for registration, database management, and barcode/card validation for fitness membership workflows.</p>
+          <div class="badge-group">
+            <span class="badge">Python</span>
+            <span class="badge">MySQL</span>
+            <span class="badge">Business Automation</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/johnkaz1" target="_blank" title="View GitHub Repo"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <!-- Project 5: Fire Detection & Localization -->
+      <div class="card project-card" data-category="embedded">
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="badge dev">AI & DRONE TECH</span>
+            <span style="font-family: var(--font-code); font-size: 0.8rem; color: var(--text-muted);">2025 - 2026</span>
+          </div>
+          <h3>Fire Detection & Localization System</h3>
+          <p>Vision-based fire detection software developed for airborne drones to identify fire coordinates in real-time and alert emergency control stations.</p>
+          <div class="badge-group">
+            <span class="badge">Python</span>
+            <span class="badge">Computer Vision</span>
+            <span class="badge">Raspberry Pi</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/johnkaz1" target="_blank" title="View GitHub Repo"><i class="fa-brands fa-github"></i></a>
         </div>
       </div>
 
@@ -715,15 +837,21 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
   <section class="container" id="contact">
     <div class="contact-box">
       <h2 style="font-size: 2.2rem; margin-bottom: 12px;">Let's Connect & Collaborate</h2>
-      <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 32px auto;">
-        Whether you have a Full Stack software project, a Security Operations opportunity, or just want to chat about code & cybersecurity:
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 12px auto;">
+        Based in Patras, Greece. Open for Software Development, Drone Tech engineering, and SOC Analyst Level 1 security roles.
+      </p>
+      <p style="color: var(--accent-cyan); font-family: var(--font-code); font-size: 0.95rem; margin-bottom: 28px;">
+        <i class="fa-solid fa-phone"></i> +30 6971745355 | <i class="fa-solid fa-envelope"></i> kazakosioannisss@gmail.com
       </p>
       <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
         <a href="https://github.com/johnkaz1" target="_blank" class="btn btn-primary">
           <i class="fa-brands fa-github"></i> GitHub Profile
         </a>
-        <a href="mailto:your-email@example.com" class="btn btn-outline" id="email-btn" onclick="copyEmail(event)">
-          <i class="fa-solid fa-envelope"></i> Copy Email
+        <a href="https://www.credly.com/badges/dib83ef-c49b-4ee7-810-7e97d420629e/public_url" target="_blank" class="btn btn-outline">
+          <i class="fa-solid fa-certificate"></i> Credly SAL1 Badge
+        </a>
+        <a href="mailto:kazakosioannisss@gmail.com" class="btn btn-outline" onclick="copyEmail(event)">
+          <i class="fa-solid fa-copy"></i> Copy Email
         </a>
       </div>
     </div>
@@ -732,25 +860,21 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 John Kaz. Crafted with <i class="fa-solid fa-terminal" style="color:var(--accent-cyan);"></i> for Software Engineering & Cybersecurity.</p>
+      <p>&copy; 2026 Ioannis Kazakos. ECE Student & Certified SAL1 Security Analyst.</p>
     </div>
   </footer>
 
   <!-- ==========================================================================
-       JAVASCRIPT LOGIC (AUDIO SYNTHESIZER, TERMINAL, CANVAS, THEMES)
+       JAVASCRIPT LOGIC
        ========================================================================== -->
   <script>
-    /* ------------------------------------------------------------------------
-       1. WEB AUDIO SYNTHESIZER (DEFAULT: ENABLED)
-       ------------------------------------------------------------------------ */
-    let sfxEnabled = true; // SOUND FX ENABLED BY DEFAULT
+    /* 1. WEB AUDIO SYNTHESIZER */
+    let sfxEnabled = true;
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     let audioCtx = null;
 
     function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new AudioContext();
-      }
+      if (!audioCtx) audioCtx = new AudioContext();
     }
 
     function playBeep(freq = 600, duration = 0.05, type = 'sine') {
@@ -770,7 +894,6 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
       } catch (e) {}
     }
 
-    // Toggle Button Logic
     const sfxBtn = document.getElementById('sfx-toggle');
     sfxBtn.addEventListener('click', () => {
       sfxEnabled = !sfxEnabled;
@@ -779,20 +902,15 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
       if (sfxEnabled) playBeep(800, 0.1, 'square');
     });
 
-    // Sound effect triggers on interactive elements
     document.querySelectorAll('a, button, input').forEach(el => {
       el.addEventListener('mouseenter', () => playBeep(400, 0.03, 'sine'));
       el.addEventListener('click', () => playBeep(700, 0.06, 'square'));
     });
 
-
-    /* ------------------------------------------------------------------------
-       2. NEON PARTICLE CANVAS MESH
-       ------------------------------------------------------------------------ */
+    /* 2. NEON PARTICLE CANVAS MESH */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let mouse = { x: null, y: null };
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -800,11 +918,6 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.x;
-      mouse.y = e.y;
-    });
 
     class Particle {
       constructor() {
@@ -828,18 +941,12 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
       }
     }
 
-    for (let i = 0; i < 55; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
+      particles.forEach(p => { p.update(); p.draw(); });
 
-      // Draw connecting lines
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           let dx = particles[a].x - particles[b].x;
@@ -859,67 +966,57 @@ Type 'help' for available commands. Try 'soc', 'stack', 'analyze', or 'coffee'.
     }
     animateParticles();
 
-
-    /* ------------------------------------------------------------------------
-       3. PRACTICAL & FUN CYBER TERMINAL
-       ------------------------------------------------------------------------ */
+    /* 3. TERMINAL LOGIC */
     const terminalInput = document.getElementById('terminal-input');
     const terminalOutput = document.getElementById('terminal-output');
     const terminalBody = document.getElementById('terminal-body');
 
     const commands = {
-      help: `AVAILABLE COMMANDS:
+      help: `COMMAND LIST:
   -----------------------------------------------------------------
-  help      - List all interactive commands
-  about     - Brief background & identity overview
-  roles     - Summary of Full Stack & SOC L1 roles
-  stack     - Display tech stack (Frontend, Backend, Cyber)
-  soc       - SOC Level 1 tools & threat response workflow
-  projects  - Show featured project directory
-  analyze   - [FUN] Run interactive SOC Security Scan simulation
-  theme     - Switch terminal theme (cyberpunk | synthwave | threat-red)
-  coffee    - [FUN] Fuel the developer
-  contact   - Display direct contact options
-  clear     - Clear terminal history`,
+  help      - Show available commands
+  cv        - Print full resume details & credentials
+  education - Display degree & university status
+  soc       - Display SAL1 SOC tools & log analysis suite
+  stack     - Programming languages & tools overview
+  projects  - List real projects (UAV Station, CHIP-8, Posi Help)
+  analyze   - [FUN] Run interactive threat & memory scan
+  contact   - Contact info (Phone, Email, Location)
+  clear     - Clear screen`,
 
-      about: `JOHN KAZ - Full Stack Software Developer & SOC Level 1 Analyst
-Driven by building efficient digital products and protecting networks against cyber threats.`,
+      cv: `IOANNIS KAZAKOS | Software Developer & SOC Analyst L1
+Degree: Electrical & Computer Engineering (M.Eng), Uni of Peloponnese
+Certifications: SAL1 Security Analyst | Michigan ECPE C2
+Location: Patras, Greece | Phone: +30 6971745355`,
 
-      roles: `ROLE OVERVIEW:
-1. FULL STACK SOFTWARE DEVELOPER:
-   Building web platforms with React, Next.js, TypeScript, Node.js, and databases.
-2. SOC LEVEL 1 ANALYST:
-   Alert triage, SIEM detection rules, PCAP investigation, malware response, Snort/YARA parsing.`,
+      education: `EDUCATION:
+- University of the Peloponnese (2023 - Present)
+  Department of Electrical & Computer Engineering (Master of Engineering)
+- Michigan ECPE (C2 Proficiency Level in English)`,
 
-      stack: `FULL STACK: JavaScript, TypeScript, React, Next.js, Node.js, Express, Python, PostgreSQL, MongoDB, REST APIs.
-SOC & CYBER: Splunk, ELK Stack, Wireshark, YARA, Snort, Linux, Bash, Phishing Analysis, Threat Intel feeds.`,
+      soc: `SOC LEVEL 1 TOOLKIT & SKILLS:
+- SAL1 Security Analyst Certified
+- Tools: Splunk SIEM, Wireshark, Windows Event Viewer, Linux Audit Logs, Snort, YARA
+- Frameworks: MITRE ATT&CK, Network Protocol Analysis, Malware Analysis Fundamentals, IOC Identification`,
 
-      soc: `SOC LEVEL 1 WORKFLOW:
-  [1] Alert Ingestion  ➔ SIEM rule triggers anomaly or suspicious traffic.
-  [2] PCAP Triage      ➔ Wireshark packet inspection for malicious payloads.
-  [3] Artifact Analysis➔ Hash lookups (VirusTotal) & phishing headers.
-  [4] Escalation       ➔ Containment protocol & L2 ticket reporting.`,
+      stack: `LANGUAGES: Python, C, C++, HTML/CSS/JS, MySQL, SQL
+EMBEDDED: Raspberry Pi, Arduino, 3D Printer Firmware, PID Controllers
+OS: Linux (Bash), Windows (PowerShell/CMD), macOS`,
 
-      projects: `FEATURED PROJECTS:
-  1. SIEM Alert Triage Dashboard (Python, Elasticsearch, React)
-  2. Cyber Analytics SaaS App (Next.js, Node, PostgreSQL)
-  3. Threat Intel Parser & Rules Generator (Python, YARA)
-  4. Cyberpunk Developer Portfolio (HTML5, JS, Canvas API)`,
+      projects: `REAL PROJECTS:
+1. UAV Ground Station (Hyperion Drone Team)
+2. CHIP-8 Emulator (Low-level C/C++)
+3. Posi Help Mobile App (Android / iOS for POSI)
+4. POSI - KEK-A Fitness Card Registration System
+5. Fire Detection & Localization System for Drones`,
 
-      contact: `CONTACT DETAILS:
-  Email:    johnkaz1@example.com
-  GitHub:   https://github.com/johnkaz1
-  Location: Greece`,
+      contact: `CONTACT:
+Email:    kazakosioannisss@gmail.com
+Phone:    +30 6971745355
+Location: Patras, Greece
+GitHub:   https://github.com/johnkaz1`,
 
-      coffee: `☕ Brewing 100% pure caffeine... 
-Debugging mode initialized. All systems nominal!`,
-
-      sudo: `Nice try! Access Denied: User is not in the sudoers file. This incident will be reported to SOC L2.`,
-
-      clear: () => {
-        terminalOutput.innerText = '';
-        return null;
-      }
+      clear: () => { terminalOutput.innerText = ''; return null; }
     };
 
     terminalInput.addEventListener('keydown', function(e) {
@@ -928,44 +1025,31 @@ Debugging mode initialized. All systems nominal!`,
         playBeep(900, 0.04, 'square');
         
         if (inputVal !== '') {
-          // Print prompt line
-          terminalOutput.innerText += `\njohnkaz1@soc-net:~$ ${inputVal}\n`;
+          terminalOutput.innerText += `\nikazakos@patras-net:~$ ${inputVal}\n`;
 
           if (inputVal === 'clear') {
             commands.clear();
           } else if (inputVal === 'analyze') {
             runScanSimulation();
-          } else if (inputVal.startsWith('theme ')) {
-            const themeName = inputVal.split(' ')[1];
-            if (['cyberpunk', 'synthwave', 'threat-red'].includes(themeName)) {
-              document.documentElement.setAttribute('data-theme', themeName);
-              terminalOutput.innerText += `[+] Theme updated to: ${themeName.toUpperCase()}\n`;
-            } else {
-              terminalOutput.innerText += `[-] Unknown theme. Available: cyberpunk, synthwave, threat-red\n`;
-            }
           } else if (commands[inputVal]) {
             terminalOutput.innerText += commands[inputVal] + '\n';
           } else {
-            terminalOutput.innerText += `Command not found: '${inputVal}'. Type 'help' for available commands.\n`;
+            terminalOutput.innerText += `Command not found: '${inputVal}'. Type 'help'.\n`;
           }
         }
-
         this.value = '';
         terminalBody.scrollTop = terminalBody.scrollHeight;
       }
     });
 
-    // Fun Interactive SOC Security Scan
     function runScanSimulation() {
       const steps = [
-        '[+] Initializing SOC L1 Security Audit...',
-        '[*] Scanning active network ports...',
-        '[*] Analyzing HTTP header signatures & TLS certs...',
-        '[*] Running YARA rules against local memory buffers...',
-        '[*] Checking IP addresses against threat intelligence feeds...',
-        '[✓] SCAN COMPLETE: 0 Vulnerabilities Found. Threat Level: NOMINAL (SAFE)'
+        '[+] Audit initialized for Ioannis Kazakos Workstation...',
+        '[*] Inspecting Wireshark PCAP logs & network sockets...',
+        '[*] Running YARA signatures against running processes...',
+        '[*] Verifying SAL1 Credly certificate hash...',
+        '[✓] AUDIT PASSED: System secure. SAL1 Credentials Verified.'
       ];
-
       let delay = 0;
       steps.forEach((step, idx) => {
         setTimeout(() => {
@@ -977,10 +1061,7 @@ Debugging mode initialized. All systems nominal!`,
       });
     }
 
-
-    /* ------------------------------------------------------------------------
-       4. PROJECT FILTERING LOGIC
-       ------------------------------------------------------------------------ */
+    /* 4. PROJECT FILTERING */
     function filterProjects(category) {
       const cards = document.querySelectorAll('#projects-grid .card');
       const buttons = document.querySelectorAll('.filter-btn');
@@ -998,15 +1079,11 @@ Debugging mode initialized. All systems nominal!`,
       });
     }
 
-
-    /* ------------------------------------------------------------------------
-       5. HELPER FUNCTIONS
-       ------------------------------------------------------------------------ */
     function copyEmail(e) {
       e.preventDefault();
-      const dummyEmail = "johnkaz1@example.com";
-      navigator.clipboard.writeText(dummyEmail).then(() => {
-        alert("Email copied to clipboard: " + dummyEmail);
+      const email = "kazakosioannisss@gmail.com";
+      navigator.clipboard.writeText(email).then(() => {
+        alert("Email copied: " + email);
       });
     }
   </script>
