@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>johnkaz1 // Cybernetic Developer Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Space Grotesk & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#030712',
+                            card: 'rgba(15, 23, 42, 0.65)',
+                            border: 'rgba(56, 189, 248, 0.2)',
+                            neonCyan: '#00f3ff',
+                            neonPurple: '#b026ff',
+                            neonPink: '#ff007f',
+                            neonGreen: '#00ff66',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(0, 243, 255, 0.4), 0 0 40px rgba(0, 243, 255, 0.1)',
+                        'neon-purple': '0 0 20px rgba(176, 38, 255, 0.4), 0 0 40px rgba(176, 38, 255, 0.1)',
+                        'neon-pink': '0 0 20px rgba(255, 0, 127, 0.4)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'scanline': 'scanline 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(0,243,255,0.2)' },
+                            '100%': { boxShadow: '0 0 35px rgba(176,38,255,0.6)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 243, 255, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(0, 243, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        /* Neon Text Glow */
+        .glow-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+        .glow-text-purple {
+            text-shadow: 0 0 10px rgba(176, 38, 255, 0.7), 0 0 20px rgba(176, 38, 255, 0.4);
+        }
+
+        /* Custom Neon Cursor */
+        #custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transition: transform 0.08s ease-out, opacity 0.2s ease;
+            transform: translate(-50%, -50%);
+        }
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00f3ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+        }
+        #cursor-ring {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 32px;
+            height: 32px;
+            border: 2px solid rgba(176, 38, 255, 0.6);
+            border-radius: 50%;
+            transition: all 0.15s ease-out;
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.03),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Terminal Blinking Cursor */
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background-color: #00f3ff;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-cyber-black text-slate-100 font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden min-h-screen relative">
+
+    <!-- Scanline Effect Toggle Overlay -->
+    <div class="scanlines fixed inset-0 z-40 opacity-40"></div>
+
+    <!-- Background Dynamic Interactive Mesh Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="hidden md:block">
+        <div id="cursor-dot"></div>
+        <div id="cursor-ring"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-4 sm:px-8 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center space-x-2 group cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 p-[1px] shadow-neon-cyan group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
+                        <span class="font-mono text-cyan-400 font-bold text-lg group-hover:text-purple-400 transition-colors">JK</span>
+                    </div>
+                </div>
+                <span class="font-mono text-xl font-bold tracking-wider text-slate-100 group-hover:text-cyan-400 transition-colors">
+                    johnkaz1<span class="text-cyan-400 animate-pulse">_</span>
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-mono text-sm tracking-wide">
+                <a href="#about" class="hover:text-cyan-400 transition-colors flex items-center space-x-1">
+                    <span class="text-cyan-500 font-bold">01.</span><span>// About</span>
+                </a>
+                <a href="#terminal-section" class="hover:text-cyan-400 transition-colors flex items-center space-x-1">
+                    <span class="text-cyan-500 font-bold">02.</span><span>// Terminal</span>
+                </a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors flex items-center space-x-1">
+                    <span class="text-cyan-500 font-bold">03.</span><span>// Projects</span>
+                </a>
+                <a href="#experience" class="hover:text-cyan-400 transition-colors flex items-center space-x-1">
+                    <span class="text-cyan-500 font-bold">04.</span><span>// Roadmap</span>
+                </a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors flex items-center space-x-1">
+                    <span class="text-cyan-500 font-bold">05.</span><span>// Contact</span>
+                </a>
+            </nav>
+
+            <!-- Utility Controls (Sound, Cursor, Status) -->
+            <div class="flex items-center space-x-3">
+                <button id="sfx-toggle" title="Toggle Sci-Fi SFX" class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-700/60 hover:border-cyan-400 text-slate-400 hover:text-cyan-400 transition-all text-xs font-mono flex items-center gap-2">
+                    <i class="fa-solid fa-volume-xmark text-rose-400" id="sfx-icon"></i>
+                    <span class="hidden sm:inline">SFX</span>
+                </button>
+
+                <button id="cursor-toggle" title="Toggle Neon Cursor" class="hidden md:flex p-2.5 rounded-lg bg-slate-900/80 border border-slate-700/60 hover:border-purple-400 text-slate-400 hover:text-purple-400 transition-all text-xs font-mono items-center gap-2">
+                    <i class="fa-solid fa-crosshairs"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-cyan-400 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel mt-4 p-6 rounded-2xl flex-col space-y-4 font-mono text-sm border border-cyan-500/20">
+            <a href="#about" class="mobile-link text-slate-300 hover:text-cyan-400">// 01. About</a>
+            <a href="#terminal-section" class="mobile-link text-slate-300 hover:text-cyan-400">// 02. Terminal</a>
+            <a href="#projects" class="mobile-link text-slate-300 hover:text-cyan-400">// 03. Projects</a>
+            <a href="#experience" class="mobile-link text-slate-300 hover:text-cyan-400">// 04. Roadmap</a>
+            <a href="#contact" class="mobile-link text-slate-300 hover:text-cyan-400">// 05. Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 pt-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-32">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="min-h-[85vh] flex flex-col justify-center items-start relative pt-8">
+            <!-- Cyber Ambient Glow Behind Hero -->
+            <div class="absolute -top-10 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-96 h-96 bg-purple-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+
+            <!-- Status Pill Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-emerald-500/30 text-emerald-400 text-xs font-mono tracking-wider mb-8 animate-float">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 absolute"></span>
+                <span class="pl-3">OPEN FOR PROJECTS &amp; COLLABORATIONS</span>
+            </div>
+
+            <!-- Main Greeting & Title -->
+            <div class="space-y-4 max-w-4xl">
+                <p class="font-mono text-cyan-400 text-sm sm:text-base tracking-widest uppercase">
+                    &gt; System Initialization Complete... Greetings, World
+                </p>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-none">
+                    Hi, I'm <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-purple-500 bg-clip-text text-transparent glow-text-cyan">johnkaz1</span>
+                </h1>
+                
+                <!-- Dynamic Typing Tagline -->
+                <div class="h-16 sm:h-20 flex items-center">
+                    <h2 class="text-xl sm:text-3xl md:text-4xl font-mono text-slate-300">
+                        I am <span id="typing-text" class="text-cyan-400 font-semibold underline decoration-purple-500/60 decoration-2 underline-offset-8"></span><span class="terminal-cursor"></span>
+                    </h2>
+                </div>
+
+                <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed font-light pt-2">
+                    Architecting next-generation digital experiences, full-stack systems, high-throughput APIs, and AI-driven interactive web applications with cutting-edge UI aesthetics.
+                </p>
+            </div>
+
+            <!-- CTA Action Buttons -->
+            <div class="mt-10 flex flex-wrap gap-4 font-mono text-sm">
+                <a href="#projects" class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold hover:shadow-neon-cyan hover:scale-105 active:scale-95 transition-all flex items-center gap-3 group">
+                    <i class="fa-solid fa-rocket group-hover:rotate-12 transition-transform"></i>
+                    <span>EXPLORE WORK</span>
+                </a>
+                <a href="#terminal-section" class="px-8 py-4 rounded-xl glass-panel text-cyan-400 border border-cyan-500/40 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-neon-cyan transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>LAUNCH TERMINAL</span>
+                </a>
+                <a href="#contact" class="px-8 py-4 rounded-xl glass-panel text-purple-300 border border-purple-500/40 hover:bg-purple-500/10 hover:border-purple-400 hover:shadow-neon-purple transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>GET IN TOUCH</span>
+                </a>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-3xl font-mono text-xs">
+                <div class="glass-card p-4 rounded-xl border border-slate-800 text-center">
+                    <div class="text-cyan-400 text-2xl font-bold">100%</div>
+                    <div class="text-slate-400 mt-1">Clean Code Mindset</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border border-slate-800 text-center">
+                    <div class="text-purple-400 text-2xl font-bold">24/7</div>
+                    <div class="text-slate-400 mt-1">Innovation & Learning</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border border-slate-800 text-center">
+                    <div class="text-emerald-400 text-2xl font-bold">Full-Stack</div>
+                    <div class="text-slate-400 mt-1">End-to-End Dev</div>
+                </div>
+                <div class="glass-card p-4 rounded-xl border border-slate-800 text-center">
+                    <div class="text-pink-400 text-2xl font-bold">Ultra-Fast</div>
+                    <div class="text-slate-400 mt-1">Performance Tuning</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT SECTION ================= -->
+        <section id="about" class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono flex items-center gap-2">
+                    <span class="text-cyan-400">01.</span> About Me
+                </h2>
+                <div class="h-[1px] bg-slate-800 flex-grow max-w-md"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Bio Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed text-base">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
+                        <p>
+                            Hello! I'm <strong class="text-cyan-400">johnkaz1</strong>, a developer passionate about crafting high-performance, visually stunning software systems. I blend creative design thinking with robust software engineering to build software that feels intuitive and blazingly fast.
+                        </p>
+                        <p>
+                            My primary focus spans full-stack web applications, modern JavaScript/TypeScript ecosystems, cloud services, and exploring cutting-edge artificial intelligence integration.
+                        </p>
+                        <p>
+                            When I'm not writing code, I'm analyzing software architectures, tweaking terminal workflows, or tinkering with open-source repositories on GitHub.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Pills -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs">
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-cyan-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-code text-cyan-400"></i> Full-Stack Dev
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-purple-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-purple-400"></i> AI Integration
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-emerald-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-cubes text-emerald-400"></i> UI Architecture
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-pink-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-pink-400"></i> Performance
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-amber-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-amber-400"></i> Security First
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-900/80 border border-blue-500/20 text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-infinity text-blue-400"></i> DevOps & Cloud
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar Visual / Graphic Badge -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group w-72 h-72 sm:w-80 sm:h-80">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition-opacity"></div>
+                        <div class="relative w-full h-full glass-panel rounded-3xl border border-cyan-500/30 p-6 flex flex-col justify-between items-center text-center overflow-hidden">
+                            <!-- Cyber Pattern Header -->
+                            <div class="w-full flex justify-between items-center font-mono text-xs text-slate-500 border-b border-slate-800 pb-3">
+                                <span>SYS_ID: JK-2026</span>
+                                <span class="text-emerald-400">● ACTIVE</span>
+                            </div>
+
+                            <!-- Inner Avatar Box -->
+                            <div class="w-28 h-28 rounded-2xl bg-slate-900 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-5xl shadow-neon-cyan group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-user-ninja"></i>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="font-mono text-lg font-bold text-white">johnkaz1</div>
+                                <div class="font-mono text-xs text-cyan-400">Full-Stack &amp; AI Architect</div>
+                            </div>
+
+                            <!-- Footer Stats Line -->
+                            <div class="w-full font-mono text-[10px] text-slate-400 flex justify-between pt-2 border-t border-slate-800">
+                                <span>HOST: github.io</span>
+                                <span>LOC: Global</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= INTERACTIVE TERMINAL & TECH EXPLORER ================= -->
+        <section id="terminal-section" class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono flex items-center gap-2">
+                    <span class="text-cyan-400">02.</span> Cyber Terminal &amp; Tech Stack Explorer
+                </h2>
+                <div class="h-[1px] bg-slate-800 flex-grow max-w-md"></div>
+            </div>
+
+            <!-- Terminal Box Container -->
+            <div class="glass-panel rounded-2xl border border-cyan-500/30 overflow-hidden shadow-2xl mb-12">
+                <!-- Terminal Window Header -->
+                <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                        <span class="font-mono text-xs text-slate-400 ml-2">johnkaz1@cyber-node: ~</span>
+                    </div>
+                    <div class="font-mono text-xs text-slate-500 hidden sm:block">
+                        Type <span class="text-cyan-400">'help'</span> for command list
+                    </div>
+                </div>
+
+                <!-- Terminal Console Body -->
+                <div id="terminal-body" class="p-6 font-mono text-sm h-80 overflow-y-auto space-y-3 bg-slate-950/80 text-slate-200">
+                    <div class="text-slate-400">
+                        CyberOS v2.6.0 (x86_64-pc-linux-gnu)<br>
+                        Type <span class="text-cyan-400 font-bold">help</span> to view available interactive commands.
+                    </div>
+                    <div id="terminal-history" class="space-y-2"></div>
+                    
+                    <!-- Command Prompt Line -->
+                    <div class="flex items-center space-x-2 pt-2">
+                        <span class="text-emerald-400 font-bold">guest@johnkaz1:~$</span>
+                        <input type="text" id="terminal-input" class="bg-transparent border-none outline-none text-cyan-300 w-full focus:ring-0 font-mono" placeholder="type command here..." autofocus autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Visual Cards -->
+            <div class="space-y-6">
+                <h3 class="text-xl font-mono text-slate-200 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-purple-400"></i> Visual Tech Stack
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Languages -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50">
+                        <div class="flex items-center space-x-3 mb-4 text-cyan-400 font-mono font-bold text-lg">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Languages</span>
+                        </div>
+                        <ul class="space-y-3 text-sm font-mono">
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>TypeScript / JS</span>
+                                <span class="text-xs text-cyan-400 font-bold">95%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Python</span>
+                                <span class="text-xs text-cyan-400 font-bold">90%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>HTML5 / CSS3</span>
+                                <span class="text-xs text-cyan-400 font-bold">98%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>SQL / NoSQL</span>
+                                <span class="text-xs text-cyan-400 font-bold">85%</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Frameworks & Libs -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-purple-500/50">
+                        <div class="flex items-center space-x-3 mb-4 text-purple-400 font-mono font-bold text-lg">
+                            <i class="fa-solid fa-cubes"></i>
+                            <span>Frameworks</span>
+                        </div>
+                        <ul class="space-y-3 text-sm font-mono">
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>React / Next.js</span>
+                                <span class="text-xs text-purple-400 font-bold">92%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Node.js / Express</span>
+                                <span class="text-xs text-purple-400 font-bold">88%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Tailwind CSS</span>
+                                <span class="text-xs text-purple-400 font-bold">95%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>FastAPI / Django</span>
+                                <span class="text-xs text-purple-400 font-bold">82%</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- AI & Systems -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/50">
+                        <div class="flex items-center space-x-3 mb-4 text-emerald-400 font-mono font-bold text-lg">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>AI &amp; Data</span>
+                        </div>
+                        <ul class="space-y-3 text-sm font-mono">
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>OpenAI API / LLMs</span>
+                                <span class="text-xs text-emerald-400 font-bold">90%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>PyTorch / TensorFlow</span>
+                                <span class="text-xs text-emerald-400 font-bold">78%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Vector DBs (Chroma/Pinecone)</span>
+                                <span class="text-xs text-emerald-400 font-bold">85%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>LangChain / Agents</span>
+                                <span class="text-xs text-emerald-400 font-bold">84%</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tools & DevOps -->
+                    <div class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-pink-500/50">
+                        <div class="flex items-center space-x-3 mb-4 text-pink-400 font-mono font-bold text-lg">
+                            <i class="fa-solid fa-server"></i>
+                            <span>Cloud &amp; Tools</span>
+                        </div>
+                        <ul class="space-y-3 text-sm font-mono">
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Git / GitHub Pages</span>
+                                <span class="text-xs text-pink-400 font-bold">95%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Docker / Containers</span>
+                                <span class="text-xs text-pink-400 font-bold">80%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>AWS / Vercel</span>
+                                <span class="text-xs text-pink-400 font-bold">85%</span>
+                            </li>
+                            <li class="flex justify-between items-center text-slate-300">
+                                <span>Linux / Bash</span>
+                                <span class="text-xs text-pink-400 font-bold">90%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PROJECTS SHOWCASE ================= -->
+        <section id="projects" class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono flex items-center gap-2">
+                    <span class="text-cyan-400">03.</span> Featured Projects
+                </h2>
+                <div class="h-[1px] bg-slate-800 flex-grow max-w-md"></div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap gap-3 font-mono text-xs mb-10" id="project-filters">
+                <button data-filter="all" class="filter-btn px-5 py-2.5 rounded-xl glass-panel border border-cyan-400 text-cyan-400 font-bold shadow-neon-cyan">ALL</button>
+                <button data-filter="fullstack" class="filter-btn px-5 py-2.5 rounded-xl glass-card text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50">FULL-STACK</button>
+                <button data-filter="ai" class="filter-btn px-5 py-2.5 rounded-xl glass-card text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50">AI &amp; ML</button>
+                <button data-filter="web3" class="filter-btn px-5 py-2.5 rounded-xl glass-card text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50">WEB3 &amp; CYBER</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between" data-category="ai">
+                    <div>
+                        <!-- Header Preview Box -->
+                        <div class="h-48 bg-gradient-to-br from-cyan-900/40 via-purple-900/20 to-slate-950 p-6 relative flex flex-col justify-between border-b border-slate-800">
+                            <div class="flex justify-between items-center">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">AI &amp; ML</span>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/johnkaz1" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors text-lg"><i class="fa-brands fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-brain text-4xl text-cyan-400 mb-2"></i>
+                                <h3 class="text-xl font-bold text-white">Neural Web Workspace</h3>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 space-y-4">
+                            <p class="text-slate-400 text-sm line-clamp-3">
+                                An interactive AI-powered markdown workspace and knowledge graph tool with multi-model local LLM integration and semantic neural search.
+                            </p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-cyan-300">
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Python</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">FastAPI</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">React</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">VectorDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('Neural Web Workspace', 'An interactive AI-powered markdown workspace and knowledge graph tool with multi-model local LLM integration and semantic neural search. Features visual graph connections, vector memory indexing, and live streaming response visualizer.', ['Python', 'FastAPI', 'React', 'VectorDB', 'Tailwind'], 'https://github.com/johnkaz1')" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-400 text-cyan-400 text-xs font-mono font-bold transition-all">
+                            VIEW DETAILS &gt;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between" data-category="fullstack">
+                    <div>
+                        <div class="h-48 bg-gradient-to-br from-purple-900/40 via-blue-900/20 to-slate-950 p-6 relative flex flex-col justify-between border-b border-slate-800">
+                            <div class="flex justify-between items-center">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">FULL-STACK</span>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/johnkaz1" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors text-lg"><i class="fa-brands fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-gauge-high text-4xl text-purple-400 mb-2"></i>
+                                <h3 class="text-xl font-bold text-white">CyberMetrics Platform</h3>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-4">
+                            <p class="text-slate-400 text-sm line-clamp-3">
+                                Real-time server telemetry and cloud infrastructure monitor featuring WebSocket streaming, instant anomaly alerts, and customizable dashboard widgets.
+                            </p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-purple-300">
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">TypeScript</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Next.js</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Node.js</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">WebSockets</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('CyberMetrics Platform', 'Real-time server telemetry and cloud infrastructure monitor featuring WebSocket streaming, instant anomaly alerts, and customizable dashboard widgets. High scalability architecture built for ultra low latency monitoring.', ['TypeScript', 'Next.js', 'Node.js', 'WebSockets', 'TailwindCSS'], 'https://github.com/johnkaz1')" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-purple-500/20 border border-slate-700 hover:border-purple-400 text-purple-300 text-xs font-mono font-bold transition-all">
+                            VIEW DETAILS &gt;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-slate-800 flex flex-col justify-between" data-category="web3">
+                    <div>
+                        <div class="h-48 bg-gradient-to-br from-emerald-900/40 via-teal-900/20 to-slate-950 p-6 relative flex flex-col justify-between border-b border-slate-800">
+                            <div class="flex justify-between items-center">
+                                <span class="px-3 py-1 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">WEB3 &amp; CYBER</span>
+                                <div class="flex gap-2">
+                                    <a href="https://github.com/johnkaz1" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors text-lg"><i class="fa-brands fa-github"></i></a>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-shield-cat text-4xl text-emerald-400 mb-2"></i>
+                                <h3 class="text-xl font-bold text-white">Quantum Vault Engine</h3>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-4">
+                            <p class="text-slate-400 text-sm line-clamp-3">
+                                End-to-end encrypted asset locker and secure smart-contract interface with zero-knowledge verification proof mechanics.
+                            </p>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px] text-emerald-300">
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Solidity</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Ethers.js</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Web3</span>
+                                <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800">Cryptography</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-0">
+                        <button onclick="openModal('Quantum Vault Engine', 'End-to-end encrypted asset locker and secure smart-contract interface with zero-knowledge verification proof mechanics. Designed for decentralized privacy and seamless Web3 interaction.', ['Solidity', 'Ethers.js', 'React', 'ZK-Proofs'], 'https://github.com/johnkaz1')" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-400 text-emerald-300 text-xs font-mono font-bold transition-all">
+                            VIEW DETAILS &gt;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= EXPERIENCE & ROADMAP ================= -->
+        <section id="experience" class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono flex items-center gap-2">
+                    <span class="text-cyan-400">04.</span> Experience &amp; Milestones
+                </h2>
+                <div class="h-[1px] bg-slate-800 flex-grow max-w-md"></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l-2 border-slate-800 ml-4 md:ml-32 space-y-12">
+                <!-- Timeline Item 1 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <!-- Glowing Node Marker -->
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-950 group-hover:scale-125 group-hover:shadow-neon-cyan transition-all"></div>
+                    
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                            <h3 class="text-xl font-bold text-white font-mono">Full-Stack &amp; AI Systems Developer</h3>
+                            <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20 w-fit">2024 — PRESENT</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Developing futuristic web platforms, autonomous AI workflows, and API architectures. Implementing high-efficiency JavaScript/TypeScript microservices and modern frontend responsive design systems.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300 pt-2">
+                            <span class="text-cyan-400">#NextJS</span>
+                            <span class="text-purple-400">#LLM_Ops</span>
+                            <span class="text-emerald-400">#TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-purple-400 border-4 border-slate-950 group-hover:scale-125 group-hover:shadow-neon-purple transition-all"></div>
+                    
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                            <h3 class="text-xl font-bold text-white font-mono">Open Source Architect &amp; Contributor</h3>
+                            <span class="text-xs font-mono text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20 w-fit">2022 — 2024</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Contributed to open source software on GitHub, created web developer tools, and built lightweight JS utility libraries focused on performance and developer experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-300 pt-2">
+                            <span class="text-cyan-400">#GitHub</span>
+                            <span class="text-purple-400">#WebTools</span>
+                            <span class="text-emerald-400">#JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative pl-8 md:pl-12 group">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-400 border-4 border-slate-950 group-hover:scale-125 group-hover:shadow-neon-green transition-all"></div>
+                    
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-3">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                            <h3 class="text-xl font-bold text-white font-mono">CS Foundation &amp; Web Engineering</h3>
+                            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 w-fit">INITIATION</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Mastered core computer science principles, data structures, algorithms, databases, web protocols, and UI design patterns.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT SECTION ================= -->
+        <section id="contact" class="scroll-mt-32">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white font-mono flex items-center gap-2">
+                    <span class="text-cyan-400">05.</span> Get In Touch
+                </h2>
+                <div class="h-[1px] bg-slate-800 flex-grow max-w-md"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Direct Info Panel -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-8 rounded-2xl border border-slate-800 space-y-6">
+                        <h3 class="text-2xl font-bold text-white font-mono">Let's build something extraordinary together.</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Whether you have an ambitious project idea, a freelance opportunity, or just want to discuss software engineering, my inbox is always open.
+                        </p>
+
+                        <!-- Copy Email Button Container -->
+                        <div class="space-y-2">
+                            <div class="text-xs font-mono text-slate-500 uppercase">Direct Email Address</div>
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <span class="font-mono text-sm text-cyan-400 font-bold" id="email-text">johnkaz1.dev@gmail.com</span>
+                                <button id="copy-email-btn" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 text-xs font-mono border border-cyan-500/40 transition-all flex items-center gap-1">
+                                    <i class="fa-solid fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Social Buttons Matrix -->
+                        <div class="space-y-3 pt-4 border-t border-slate-800">
+                            <div class="text-xs font-mono text-slate-500 uppercase">Cyber Network Channels</div>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://github.com/johnkaz1" target="_blank" class="p-3 rounded-xl glass-panel text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all text-xl flex items-center justify-center w-12 h-12">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" class="p-3 rounded-xl glass-panel text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all text-xl flex items-center justify-center w-12 h-12">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://x.com" target="_blank" class="p-3 rounded-xl glass-panel text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all text-xl flex items-center justify-center w-12 h-12">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a href="https://discord.com" target="_blank" class="p-3 rounded-xl glass-panel text-slate-300 hover:text-cyan-400 hover:border-cyan-400 transition-all text-xl flex items-center justify-center w-12 h-12">
+                                    <i class="fa-brands fa-discord"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Futuristic Contact Form -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="glass-card p-8 rounded-2xl border border-slate-800 space-y-6 relative overflow-hidden">
+                        <div class="font-mono text-xs text-cyan-400 flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>SECURE TRANSMISSION FORM</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-mono text-slate-400">YOUR NAME</label>
+                                <input type="text" required placeholder="e.g. Neo" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 text-slate-200 text-sm focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none font-mono transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-mono text-slate-400">EMAIL ADDRESS</label>
+                                <input type="email" required placeholder="neo@matrix.io" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 text-slate-200 text-sm focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none font-mono transition-all">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-mono text-slate-400">PROJECT SUBJECT</label>
+                            <input type="text" required placeholder="Full-Stack Web App Development" class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 text-slate-200 text-sm focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none font-mono transition-all">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-mono text-slate-400">TRANSMISSION MESSAGE</label>
+                            <textarea rows="4" required placeholder="Describe your project scope or proposal..." class="w-full bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 text-slate-200 text-sm focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none font-mono transition-all resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-slate-950 font-mono font-bold hover:shadow-neon-cyan hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-satellite-dish"></i>
+                            <span>TRANSMIT MESSAGE</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="mt-32 border-t border-slate-800/80 py-8 px-4 glass-panel relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>SYS_STATUS: ALL SYSTEMS OPERATIONAL</span>
+            </div>
+            <div>
+                &copy; <span id="year-span">2026</span> johnkaz1. Built for GitHub Pages.
+            </div>
+            <a href="#hero" class="hover:text-cyan-400 transition-colors flex items-center gap-1">
+                <span>[ BACK TO TOP ]</span>
+                <i class="fa-solid fa-arrow-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none glass-panel p-4 rounded-xl border border-cyan-400/50 shadow-neon-cyan text-xs font-mono text-cyan-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-cyan-400 text-base"></i>
+        <span id="toast-msg">Notification Message</span>
+    </div>
+
+    <!-- Quick View Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-2xl rounded-2xl border border-cyan-500/40 p-6 sm:p-8 space-y-6 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-cyan-400 text-xl font-mono">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="space-y-2">
+                <div class="text-xs font-mono text-cyan-400">// PROJECT BREAKDOWN</div>
+                <h3 id="modal-title" class="text-2xl font-bold text-white">Project Title</h3>
+            </div>
+            <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed">
+                Detailed description goes here.
+            </p>
+            <div class="space-y-2">
+                <div class="text-xs font-mono text-slate-400">TECH STACK UTILIZED:</div>
+                <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div class="pt-4 flex justify-end gap-4 font-mono text-xs">
+                <a id="modal-github" href="#" target="_blank" class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-400 text-cyan-400 font-bold transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub Repo</span>
+                </a>
+                <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Set dynamic year
+        document.getElementById('year-span').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // Sci-Fi Web Audio API Synthesizer Sound FX
+        let soundEnabled = false;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playBeep(freq = 600, type = 'sine', duration = 0.08) {
+            if (!soundEnabled) return;
+            initAudio();
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        const sfxBtn = document.getElementById('sfx-toggle');
+        const sfxIcon = document.getElementById('sfx-icon');
+        sfxBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                sfxIcon.className = "fa-solid fa-volume-high text-cyan-400";
+                playBeep(880, 'sine', 0.1);
+                showToast("Sci-Fi Sound FX Enabled");
+            } else {
+                sfxIcon.className = "fa-solid fa-volume-xmark text-rose-400";
+                showToast("Sound FX Disabled");
+            }
+        });
+
+        // Custom Cursor Logic
+        const cursor = document.getElementById('custom-cursor');
+        const cursorRing = document.getElementById('cursor-ring');
+        let cursorVisible = true;
+
+        document.addEventListener('mousemove', (e) => {
+            if (!cursorVisible) return;
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        const cursorToggleBtn = document.getElementById('cursor-toggle');
+        cursorToggleBtn.addEventListener('click', () => {
+            cursorVisible = !cursorVisible;
+            if (cursorVisible) {
+                cursor.classList.remove('hidden');
+                showToast("Neon Cursor Enabled");
+            } else {
+                cursor.classList.add('hidden');
+                showToast("Default Cursor Restored");
+            }
+        });
+
+        // Dynamic Interactive Mesh Canvas Background
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 180 };
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? '#00f3ff' : '#b026ff';
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction distance
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouse.radius) {
+                        let force = (mouse.radius - dist) / mouse.radius;
+                        this.x -= (dx / dist) * force * 2;
+                        this.y -= (dy / dist) * force * 2;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((width * height) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Connect nearby particles
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - dist / 120 * 0.8})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        resizeCanvas();
+        animateCanvas();
+
+        // Hero Typing Effect
+        const typingText = document.getElementById('typing-text');
+        const roles = [
+            'a Full-Stack Systems Architect.',
+            'building Next-Gen Web Apps.',
+            'integrating AI & Neural Models.',
+            'a Clean Code Enthusiast.'
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeLoop() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typingText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeLoop, typeSpeed);
+        }
+
+        typeLoop();
+
+        // Interactive Terminal Execution Engine
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalHistory = document.getElementById('terminal-history');
+
+        const commands = {
+            'help': 'Available commands: <span class="text-cyan-400">help, about, skills, projects, contact, matrix, clear, sudo, whoami</span>',
+            'about': 'johnkaz1: Full-stack developer obsessed with UI precision, Web APIs, and high performance.',
+            'skills': 'Languages: TypeScript, JavaScript, Python, SQL | Frameworks: React, Next.js, FastAPI | Tools: Docker, Git, Linux',
+            'projects': 'Featured: Neural Web Workspace, CyberMetrics Platform, Quantum Vault Engine. Scroll to Section 03 for visual overview.',
+            'contact': 'Email: johnkaz1.dev@gmail.com | GitHub: github.com/johnkaz1',
+            'whoami': 'Guest User // Cyber Node Visitor #8082',
+            'sudo': '<span class="text-rose-400">Permission denied: You need level 5 cyber clearance for root access!</span>',
+            'matrix': '<span class="text-emerald-400">Entering Matrix Mode... 01001010 01001111 01001000 01001110 01001011 01000001 01011010</span>'
+        };
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                playBeep(1200, 'square', 0.05);
+                const inputVal = terminalInput.value.trim().toLowerCase();
+                if (!inputVal) return;
+
+                // Add command entry to history
+                const cmdLine = document.createElement('div');
+                cmdLine.innerHTML = `<span class="text-emerald-400 font-bold">guest@johnkaz1:~$</span> <span class="text-cyan-300">${escapeHTML(inputVal)}</span>`;
+                terminalHistory.appendChild(cmdLine);
+
+                // Output result
+                const resLine = document.createElement('div');
+                resLine.className = "text-slate-300 pl-4 border-l-2 border-cyan-500/40 my-1";
+
+                if (inputVal === 'clear') {
+                    terminalHistory.innerHTML = '';
+                    terminalInput.value = '';
+                    return;
+                } else if (commands[inputVal]) {
+                    resLine.innerHTML = commands[inputVal];
+                } else {
+                    resLine.innerHTML = `<span class="text-rose-400">Command not recognized: '${escapeHTML(inputVal)}'. Type 'help' for command list.</span>`;
+                }
+
+                terminalHistory.appendChild(resLine);
+                terminalInput.value = '';
+
+                // Scroll terminal to bottom
+                const termBody = document.getElementById('terminal-body');
+                termBody.scrollTop = termBody.scrollHeight;
+            }
+        });
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // Projects Category Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                playBeep(700, 'sine', 0.05);
+                filterBtns.forEach(b => {
+                    b.className = "filter-btn px-5 py-2.5 rounded-xl glass-card text-slate-400 hover:text-cyan-400 hover:border-cyan-400/50";
+                });
+                btn.className = "filter-btn px-5 py-2.5 rounded-xl glass-panel border border-cyan-400 text-cyan-400 font-bold shadow-neon-cyan";
+
+                const filter = btn.getAttribute('data-filter');
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Quick View Project Modal
+        const modal = document.getElementById('project-modal');
+        function openModal(title, desc, tags, github) {
+            playBeep(900, 'sine', 0.1);
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-desc').textContent = desc;
+            document.getElementById('modal-github').href = github;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = '';
+            tags.forEach(tag => {
+                const tagSpan = document.createElement('span');
+                tagSpan.className = "bg-slate-900 border border-cyan-500/30 text-cyan-300 font-mono text-xs px-3 py-1 rounded-md";
+                tagSpan.textContent = tag;
+                tagsContainer.appendChild(tagSpan);
+            });
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeModal() {
+            playBeep(500, 'sine', 0.05);
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Copy Email Toast
+        const copyEmailBtn = document.getElementById('copy-email-btn');
+        const emailText = document.getElementById('email-text').textContent;
+
+        copyEmailBtn.addEventListener('click', () => {
+            playBeep(1000, 'sine', 0.08);
+            navigator.clipboard.writeText(emailText).then(() => {
+                showToast("Email address copied to clipboard!");
+            }).catch(() => {
+                showToast("Failed to copy email.");
+            });
+        });
+
+        // Contact Form Submission Mock
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            playBeep(1100, 'sine', 0.12);
+            showToast("Message transmitted successfully!");
+            e.target.reset();
+        });
+
+        // Toast Notification Function
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Sound effect on button hovers
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                playBeep(400, 'sine', 0.02);
+            });
+        });
+    </script>
+</body>
+</html>
